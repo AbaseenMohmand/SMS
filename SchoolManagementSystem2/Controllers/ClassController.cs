@@ -45,6 +45,8 @@ namespace SchoolManagementSystem2.Controllers
                 vm.Id = data.Id;
                 data.CreatedOn = DateTime.Now;
                 data.UpdatedOn = DateTime.Now;
+                // test
+                // test
                 
             }
 
