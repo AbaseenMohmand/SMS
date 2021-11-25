@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SchoolManagementSystem2.ViewModels.StudentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedIP)
+            </th>
+            <th>
+                <a asp-action="AddOrEdit" class="btn btn-outline-primary">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedIP)
+            </td>
+            <td>
+                <a asp-action="AddOrEdit" asp-route-id="@item.Id">Edit</a> |
+               
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="container">
+
+    
+
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+        <li class="list-group-item" >
+            <a  asp-action="GetByName" asp-route-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.SchoolName)
+            </a>
+        </li>
+            
+        }
+        </ul>
+    
+</div>

@@ -1,0 +1,101 @@
+﻿@*@model IEnumerable<SchoolManagementSystem2.ViewModels.StudentViewModel>*@
+
+
+<div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="logo">
+        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+            <div class="logo-image-small">
+                <img src="../assets/img/logo-small.png">
+            </div>
+            <!-- <p>CT</p> -->
+        </a>
+        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+            Creative Tim
+            <!-- <div class="logo-image-big">
+              <img src="../assets/img/logo-big.png">
+            </div> -->
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="active ">
+                <a asp-controller="Registration" asp-action="Index">
+                    <i class="fas fa-school"></i>
+                    <p>Schools</p>
+
+                </a>
+            </li>
+            @*<li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var item in Model)
+                    {
+
+                <a asp-controller="studentregs" asp-action="GetByName" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.SchoolName)
+                </a>}
+                </div>
+                        </div>
+        </li>*@
+            <li>
+                <a asp-controller="student" asp-action="Index">
+                    <i class="nc-icon nc-diamond"></i>
+                    <p>Students</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Teacher" asp-action="index">
+                    <i class="nc-icon nc-pin-3"></i>
+                    <p>Teacher</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Class" asp-action="index">
+                    <i class="nc-icon nc-bell-55"></i>
+                    <p>Class</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Section" asp-action="index">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>Section</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Fee" asp-action="index">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>Fee Record</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Attendance" asp-action="AddOrEditAttendance">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>Attendance Record</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Employee" asp-action="index">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>Employee</p>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Sallery" asp-action="index">
+                    <i class="nc-icon nc-single-02"></i>
+                    <p>Sallery</p>
+                </a>
+            </li>
+
+            <li class="active-pro">
+                <a href="./upgrade.html">
+                    <i class="nc-icon nc-spaceship"></i>
+                    <p>Upgrade to PRO</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

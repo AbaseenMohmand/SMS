@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SchoolManagementSystem2.ViewModels.SalleryViewModel>
+
+@{
+    ViewData["Title"] = "Sallery Index";
+}
+
+<h1>Sallery List</h1>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeTypeName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+
+
+            <th>
+                <a asp-action="AddOrEditSallery" class="btn btn-outline-primary">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeTypeName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+
+
+            <td>
+                <a asp-action="AddOrEditSallery" asp-route-id="@item.Id">Edit</a> |
+
+                <a asp-action="DeleteSallery" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

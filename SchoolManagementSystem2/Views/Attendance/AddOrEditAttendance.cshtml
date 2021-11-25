@@ -1,0 +1,155 @@
+﻿@model SchoolManagementSystem2.ViewModels.AttendanceViewModel
+ 
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+
+   // string[] tableColoumnHeader = new string[] { "StudentName","Attendance" };
+}
+
+
+
+<h4>Attendance Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEditAttendance">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label class="control-label">Class</label>
+                <select class="form-control" asp-for="ClassId" id="classId">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Section</label>
+                <select class="form-control" asp-for="SectionId" id="sectionId">
+                </select>
+            </div>
+
+            <div ></div>
+
+
+            <div class="form-group">
+                <input type="button" id="getStd" value="Submit" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    Student Name
+                </td>
+              
+                <td>
+                    Attendance
+                </td>
+                <td>
+                    <input type="button" id="saveStd" value="Save" class="btn btn-primary" />
+                </td>
+            </tr>
+        </thead>
+        <tbody id="tablespace">
+           
+        </tbody>
+    </table>
+</div>
+
+
+   
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script>
+    $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetClasses", "Fee")',
+             success: function (result) {
+                 console.log(result);
+                 $('#classId').empty();
+                 $('#classId').append('<option value=""> Select </option>');
+
+               $.each(result, function (i, item) {
+
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+               $('#classId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+        $("#classId").change(function () {
+           // alert("Change");
+            var end = this.value;
+            $.ajax({
+                type: 'GET',
+                url: '../Attendance/GetSectionById?id=' + this.value,
+                success: function (result) {
+                    console.log(result);
+                    $('#sectionId').empty();
+                    $.each(result, function (i, item) {
+                        console.log(item);
+                        // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                        $('#sectionId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+                    });
+                },
+                error: function (xhr, status, err) {
+                    // error handling
+                }
+            });
+        });
+        $("#getStd").on('click', function () {
+            //alert("Change");
+            var end = this.value;
+            var ClassId = $("#classId").val();
+            var SectionId = $("#sectionId").val();
+
+
+            $.ajax({
+                type: 'GET',
+                url: '../Attendance/GetStudentsByClassAndSection?classId=' + ClassId + "&sectionId=" + SectionId,
+                success: function (result) {
+                    console.log(result);
+                    debugger;
+                    var tablecontents = "";
+                    tablecontents = "<table>";
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result);
+                        tablecontents += "<tr>";
+                        tablecontents += "<td>" + result[i].studentName + "</td>";
+                        tablecontents += "<td><input type='radio' name='" + result[i].id + "Status' value='Present'>Present </td>";
+                        tablecontents += "<td><input type='radio' name='" + result[i].id + "Status' value='Absent'> Absent </td>";
+                        tablecontents += "<td><input type='radio' name='" + result[i].id + "Status' value='HalfLeave'> HalfLeave </td>";
+
+                        tablecontents += "</tr>";
+                        $("input[type='button']").on('click', function () {
+
+                            $("input[name='Status']:checked").val();
+                        });
+                    }
+
+                    tablecontents += "</table>";
+                    document.getElementById("tablespace").innerHTML = tablecontents;
+                },
+                error: function (xhr, status, err) {
+                    // error handling
+                }
+            });
+        });
+
+
+    })
+
+    
+
+        </script>

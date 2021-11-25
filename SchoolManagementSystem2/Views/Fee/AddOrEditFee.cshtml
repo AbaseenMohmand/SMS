@@ -1,0 +1,124 @@
+﻿@model SchoolManagementSystem2.ViewModels.FeeViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Fee Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEditFee">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label class="control-label">Class</label>
+                <select class="form-control" asp-for="ClassId" id="classId">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Student</label>
+                <select class="form-control" asp-for="StudentId" id="studentId">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Month</label>
+                <select class="form-control" asp-for="MonthId" id="monthId">
+                </select>
+            </div>
+
+            <div class="form-group" >
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetClasses", "Fee")',
+             success: function (result) {
+                 console.log(result);
+               $('#classId').empty();
+               $.each(result, function (i, item) {
+
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+               $('#classId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#classId").change(function () {
+            var end = this.value;
+            $.ajax({
+                type: 'GET',
+                url: '../Fee/GetStudents?id=' + this.value,
+             success: function (result) {
+                 console.log(result);
+                 $('#studentId').empty();
+                 $.each(result, function (i, item) {
+                     console.log(item);
+                     // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                     $('#studentId').append('<option value="' + item.id + '"> ' + item.firstName +   ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+        });
+
+
+    })
+
+
+
+      $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetMonth", "Fee")',
+             success: function (result) {
+                 console.log(result);
+                 $('#monthId').empty();
+               $.each(result, function (i, item) {
+
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                   $('#monthId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+
+    })
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

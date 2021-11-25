@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SchoolManagementSystem2.ViewModels.FeeViewModel>
+
+@{
+    ViewData["Title"] = "Fee Index";
+}
+
+<h1>Fee List</h1>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+
+
+            <th>
+                <a asp-action="AddOrEditFee" class="btn btn-outline-primary">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+
+
+            <td>
+                <a asp-action="AddOrEditFee" asp-route-id="@item.Id">Edit</a> |
+
+                <a asp-action="DeleteFee" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

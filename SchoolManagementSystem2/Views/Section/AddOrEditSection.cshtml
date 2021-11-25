@@ -1,0 +1,66 @@
+﻿@model SchoolManagementSystem2.ViewModels.SectionViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Section Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEditSection">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label  class="control-label">Class</label>
+               <select class="form-control" asp-for="ClassId" id="classId">
+               </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetClasses", "Section")',
+             success: function (result) {
+                 console.log(result);
+               $('#classId').empty();
+               $.each(result, function (i, item) {
+               
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+               $('#classId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+
+    })
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

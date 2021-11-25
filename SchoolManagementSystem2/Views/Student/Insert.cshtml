@@ -1,0 +1,164 @@
+﻿@model SchoolManagementSystem2.ViewModels.StudentAndGuardViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>StudentReg Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Insert">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Class</label>
+                <select class="form-control" asp-for="ClassId" id="classId">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Section</label>
+                <select class="form-control" asp-for="SectionId" id="sectionId">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CNIC" class="control-label"></label>
+                <input asp-for="CNIC" class="form-control" />
+                <span asp-validation-for="CNIC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MobileNO" class="control-label"></label>
+                <input asp-for="MobileNO" class="form-control" />
+                <span asp-validation-for="MobileNO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dob" class="control-label"></label>
+                <input asp-for="Dob" class="form-control" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GFirstName" class="control-label"></label>
+                <input asp-for="GFirstName" class="form-control" />
+                <span asp-validation-for="GFirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GLastName" class="control-label"></label>
+                <input asp-for="GLastName" class="form-control" />
+                <span asp-validation-for="GLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GCNIC" class="control-label"></label>
+                <input asp-for="GCNIC" class="form-control" />
+                <span asp-validation-for="GCNIC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GMobileNo" class="control-label"></label>
+                <input asp-for="GMobileNo" class="form-control" />
+                <span asp-validation-for="GMobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GAddress" class="control-label"></label>
+                <input asp-for="GAddress" class="form-control" />
+                <span asp-validation-for="GAddress" class="text-danger"></span>
+            </div>  <div class="form-group">
+                <label asp-for="GuardianType" class="control-label"></label>
+                <input asp-for="GuardianType" class="form-control" />
+                <span asp-validation-for="GuardianType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetClasses", "Student")',
+             success: function (result) {
+                 console.log(result);
+               $('#classId').empty();
+               $.each(result, function (i, item) {
+
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                   $('#classId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+         });
+
+        $("#classId").change(function () {
+            alert("Change");
+            var end = this.value;
+            $.ajax({
+                type: 'GET',
+                url: '../Attendance/GetSectionById?id=' + this.value,
+                success: function (result) {
+                    console.log(result);
+                    $('#sectionId').empty();
+                    $.each(result, function (i, item) {
+                        console.log(item);
+                        // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                        $('#sectionId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+                    });
+                },
+                error: function (xhr, status, err) {
+                    // error handling
+                }
+            });
+        });
+
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

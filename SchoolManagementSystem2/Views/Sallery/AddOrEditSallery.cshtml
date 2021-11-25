@@ -1,0 +1,117 @@
+﻿@model SchoolManagementSystem2.ViewModels.SalleryViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Sallery Form</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEditSallery">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label class="control-label">Employee Type</label>
+                <select class="form-control" asp-for="EmployeeType" id="employeeTypeId">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Employee</label>
+                <select class="form-control" asp-for="EmployeeId" id="employeeId">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Month</label>
+                <select class="form-control" asp-for="MonthId" id="monthId">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetEmployeeType", "Sallery")',
+             success: function (result) {
+                 console.log(result);
+                 $('#employeeTypeId').empty();
+               $.each(result, function (i, item) {
+
+                   // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                   $('#employeeTypeId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+
+    })
+</script>
+
+<script>
+    
+
+
+
+      $(document).ready(function () {
+         $.ajax({
+       type: 'GET',
+       url: '@Url.Action("GetMonth", "Fee")',
+             success: function (result) {
+                 console.log(result);
+                 $('#monthId').empty();
+               $.each(result, function (i, item) {
+
+               // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                   $('#monthId').append('<option value="' + item.id + '"> ' + item.name + ' </option>');
+           });
+       },
+       error: function (xhr, status, err) {
+           // error handling
+       }
+    });
+          $("#employeeTypeId").change(function () {
+              var end = this.value;
+              $.ajax({
+                  type: 'GET',
+                  url: '../sallery/GetEmployeeByType?type=' + this.value,
+                  success: function (result) {
+                      console.log(result);
+                      $('#employeeId').empty();
+                      $.each(result, function (i, item) {
+                          console.log(item);
+                          // replace 'item.Value' and 'item.Text' from corresponding list properties into model class
+                          $('#employeeId').append('<option value="' + item.id + '"> ' + item.name +  ' </option>');
+                      });
+                  },
+                  error: function (xhr, status, err) {
+                      // error handling
+                  }
+              });
+          });
+
+    })
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

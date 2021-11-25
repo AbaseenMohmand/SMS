@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SchoolManagementSystem2.ViewModels.SectionViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Section List</h1>
+
+<p>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+
+           
+            <th>
+                <a asp-action="AddOrEditSection" class="btn btn-outline-primary">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+               
+
+                <td>
+                    <a asp-action="AddOrEditSection" asp-route-id="@item.Id">Edit</a> |
+
+                    <a asp-action="DeleteSection" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
