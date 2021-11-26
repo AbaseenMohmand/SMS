@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6hD36H5bqrdg/dj+g/+fN4Ugp58+4U9xYSVPmuPR+65QLYPylAW0meao3CN0Ag3gWLf/X1fKtVkmOaW/Xa4wFA==",
+  "dgSpecHash": "Z47IkZLw4uyC5hRGOINVqB+mZduhAhqJN2P+j9MMmMR1dTarvYMIsvOwhbUcfreOYD/5z7FxZVO1fESc7Yzjog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
+  "projectFilePath": "D:\\SMS\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abbasin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Abbasin\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",

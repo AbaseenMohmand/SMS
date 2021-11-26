@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj": {}
+    "D:\\SMS\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj": {
+    "D:\\SMS\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
+        "projectUniqueName": "D:\\SMS\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
         "projectName": "SchoolManagementSystem2",
-        "projectPath": "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
+        "projectPath": "D:\\SMS\\SchoolManagementSystem2\\SchoolManagementSystem2.csproj",
         "packagesPath": "C:\\Users\\Abbasin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Abbasin\\source\\repos\\SchoolManagementSystem2\\SchoolManagementSystem2\\obj\\",
+        "outputPath": "D:\\SMS\\SchoolManagementSystem2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Abbasin\\AppData\\Roaming\\NuGet\\NuGet.Config",
