@@ -245,7 +245,7 @@ namespace SchoolManagementSystem2.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("SchoolManagementSystem2.Data.Class", b =>
+            modelBuilder.Entity("SchoolManagementSystem2.Data.Classs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -304,6 +304,9 @@ namespace SchoolManagementSystem2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

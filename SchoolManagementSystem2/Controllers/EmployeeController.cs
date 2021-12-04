@@ -13,6 +13,7 @@ namespace SchoolManagementSystem2.Controllers
     {
         private readonly IEmployeeRep _interfaceEmployee;
 
+
         public EmployeeController(IEmployeeRep interfaceEmployee)
         {
             _interfaceEmployee = interfaceEmployee;

@@ -1,8 +1,10 @@
-﻿using SchoolManagementSystem2.Data;
+﻿using Microsoft.AspNetCore.Hosting;
+using SchoolManagementSystem2.Data;
 using SchoolManagementSystem2.Models;
 using SchoolManagementSystem2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,11 +13,14 @@ namespace SchoolManagementSystem2.Repository.Employees
     public class EmployeeRep:IEmployeeRep
     {
         private readonly StudentDbContext _context;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
+        
 
-        public EmployeeRep(StudentDbContext context)
+        public EmployeeRep(StudentDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            webHostEnvironment = hostEnvironment;
 
         }
 
@@ -107,6 +112,7 @@ namespace SchoolManagementSystem2.Repository.Employees
         }
         public EmployeeViewModel AddOrEditEmployee(EmployeeViewModel employeeViewModel)
         {
+            string uniqueFileName = UploadedFile(employeeViewModel);
             var employee = new Employee();
             employee.FirstName = employeeViewModel.FirstName;
             employee.LastName = employeeViewModel.LastName;
@@ -116,6 +122,7 @@ namespace SchoolManagementSystem2.Repository.Employees
             employee.Designation = employeeViewModel.Designation;
             employee.ContactNo = employeeViewModel.ContactNo;
             employee.Id = employeeViewModel.Id;
+            employee.ProfilePicture = uniqueFileName;
             employee.CreatedOn = DateTime.Now;
             employee.CreatedBy = 1;
             employee.CreatedIP = "67676";
@@ -136,6 +143,23 @@ namespace SchoolManagementSystem2.Repository.Employees
 
 
             return employeeViewModel;
+        }
+
+        private string UploadedFile(EmployeeViewModel employeeViewModel)
+        {
+            string uniqueFileName = null;
+
+            if (employeeViewModel.ProfileImage != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + employeeViewModel.ProfileImage.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    employeeViewModel.ProfileImage.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

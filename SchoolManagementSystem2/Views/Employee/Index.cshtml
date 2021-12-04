@@ -44,6 +44,9 @@
                 @Html.DisplayNameFor(model => model.CreatedIP)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ProfileImage)
+            </th>
+            <th>
                 <a asp-action="AddOrEditEmployee" class="btn btn-outline-primary">Create New</a>
             </th>
         </tr>
@@ -52,6 +55,13 @@
         @foreach (var item in Model)
         {
         <tr>
+            <td>
+                <img src="~/images/@item.ProfileImage"
+                     class="rounded-circle"
+                     height="40" width="40"
+                     asp-append-version="true" />
+          
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
