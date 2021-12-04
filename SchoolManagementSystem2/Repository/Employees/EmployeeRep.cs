@@ -32,6 +32,7 @@ namespace SchoolManagementSystem2.Repository.Employees
             {
                 listData.Add(new EmployeeViewModel()
                 {
+                   
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Email = item.Email,

@@ -46,7 +46,7 @@ namespace SchoolManagementSystem2.Controllers
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Index", "StudentRegs");
+                    return RedirectToAction("index", "Registration");
                 }
                 foreach (var errors in result.Errors)
                 {
@@ -96,7 +96,7 @@ namespace SchoolManagementSystem2.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("index", "studentregs");
+                        return RedirectToAction("index", "Registration");
                     }
                     
                 }
